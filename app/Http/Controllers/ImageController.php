@@ -32,7 +32,7 @@ class ImageController extends Controller
         $path = $request->file('image')->store('images', 's3');
 
         //
-        Storage::disk('s3')->setVisibility($path, 'public');
+        // Storage::disk('s3')->setVisibility($path, 'public');
 
         //Upload to MySQL Database
         $image = Image::create([
@@ -52,7 +52,7 @@ class ImageController extends Controller
     public function show(Image $image)
     {
         //
-        // return Storage::disk('s3')->response('images/' . $image->filename);
-        return url;
+        return Storage::disk('s3')->response('images/' . $image->filename);
+        // return $image;
     }
 }
